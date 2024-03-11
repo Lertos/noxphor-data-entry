@@ -231,7 +231,7 @@ void AddNewLocation()
 
         try
         {
-            Location location = new Location(id, displayName, description, chosenType, [], []);
+            Location location = new Location(id, displayName, description, chosenType);
         }
         catch (Exception e)
         {
@@ -253,4 +253,22 @@ void EditLocation()
 void DeleteLocation()
 {
 
+}
+
+void SaveLocation(Location location)
+{
+    ObjectStorage storage = new ObjectStorage(GameData.FILE_NAME_LOCATIONS);
+
+    storage.StoreObject(location, location.id);
+}
+
+Location LoadLocation(string locationID)
+{
+    ObjectStorage storage = new ObjectStorage(GameData.FILE_NAME_LOCATIONS);
+
+    //TODO: Add try catch if it cannot be found
+    Location location = storage.RetrieveObject<Location>(locationID);
+    Console.WriteLine(location.name);
+
+    return location;
 }
