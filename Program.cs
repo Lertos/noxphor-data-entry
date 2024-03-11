@@ -1,4 +1,6 @@
 ﻿
+using System.Drawing;
+
 string errorMessage = "";
 
 MainMenu();
@@ -169,8 +171,8 @@ void AddNewLocation()
         }
 
         //ID
-        Console.WriteLine("\n==Enter in the location ID:");
-        string id = Console.ReadLine();
+        Console.WriteLine("\n==Enter the location ID:");
+        string? id = Console.ReadLine();
 
         if (string.IsNullOrEmpty(id))
         {
@@ -179,8 +181,8 @@ void AddNewLocation()
         }
 
         //Display name
-        Console.WriteLine("\n==Enter in the location display name:");
-        string displayName = Console.ReadLine();
+        Console.WriteLine("\n==Enter the location display name:");
+        string? displayName = Console.ReadLine();
 
         if (string.IsNullOrEmpty(displayName))
         {
@@ -189,12 +191,38 @@ void AddNewLocation()
         }
 
         //Description
-        Console.WriteLine("\n==Enter in the location description:");
-        string description = Console.ReadLine();
+        Console.WriteLine("\n==Enter the location description:");
+        string? description = Console.ReadLine();
 
         if (string.IsNullOrEmpty(description))
         {
             errorMessage = "Location description cannot be empty";
+            continue;
+        }
+
+        //Type
+        Console.Write("\n==Enter the location type. Options are (|");
+
+        foreach (string e in Enum.GetNames(typeof(Location.Type)))
+        {
+            Console.Write($" {e} |");
+        }
+        Console.WriteLine($")");
+
+        string? type = Console.ReadLine();
+
+        if (string.IsNullOrEmpty(type))
+        {
+            errorMessage = "Location type cannot be empty";
+            continue;
+        }
+
+        Location.Type chosenType;
+        bool isValidType = Enum.TryParse(type.ToUpper(), out chosenType);
+
+        if (!isValidType )
+        {
+            errorMessage = "An invalid type was entered.";
             continue;
         }
 
