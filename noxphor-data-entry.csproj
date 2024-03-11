@@ -8,4 +8,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="noxphor">
+      <HintPath>..\noxphor-text-idle\bin\Debug\net8.0\noxphor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
