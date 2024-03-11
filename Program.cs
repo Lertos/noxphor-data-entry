@@ -157,8 +157,8 @@ void AddNewLocation()
         Console.Clear();
 
         Console.WriteLine("===============================================");
-        Console.WriteLine(" Enter in the information as you are asked:");
-        Console.WriteLine(" b - Cancel and go back to the Previous Menu");
+        Console.WriteLine(" --LOCATION CREATION--");
+        Console.WriteLine(" < - Go back to the Previous Menu");
         Console.WriteLine("===============================================");
 
         if (!string.IsNullOrEmpty(errorMessage))
@@ -179,6 +179,7 @@ void AddNewLocation()
             errorMessage = "Location ID cannot be empty";
             continue;
         }
+        else if (id == ">") break;
 
         //Display name
         Console.WriteLine("\n==Enter the location display name:");
@@ -189,6 +190,7 @@ void AddNewLocation()
             errorMessage = "Location display name cannot be empty";
             continue;
         }
+        else if (id == ">") break;
 
         //Description
         Console.WriteLine("\n==Enter the location description:");
@@ -199,6 +201,7 @@ void AddNewLocation()
             errorMessage = "Location description cannot be empty";
             continue;
         }
+        else if (id == ">") break;
 
         //Type
         Console.Write("\n==Enter the location type. Options are (|");
@@ -216,6 +219,7 @@ void AddNewLocation()
             errorMessage = "Location type cannot be empty";
             continue;
         }
+        else if (id == ">") break;
 
         Location.Type chosenType;
         bool isValidType = Enum.TryParse(type.ToUpper(), out chosenType);
@@ -224,6 +228,20 @@ void AddNewLocation()
         {
             errorMessage = "An invalid type was entered.";
             continue;
+        }
+
+        try
+        {
+            Location location = new Location(id, displayName, description, chosenType, [], []);
+
+            Console.WriteLine(location.id);
+            Console.WriteLine(location.name);
+            Console.WriteLine(location.description);
+            Console.WriteLine(chosenType);
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.ToString();
         }
 
         //TODO: Check if the location already exists. Also check what happens when you save and the ID exists; should replace.
