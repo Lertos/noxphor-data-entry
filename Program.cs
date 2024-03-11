@@ -150,14 +150,13 @@ bool HandleLocationInput()
 
 void AddNewLocation()
 {
-    bool error = true;
-    
-    while (error)
+    while (true)
     {
         Console.Clear();
 
         Console.WriteLine("===============================================");
         Console.WriteLine(" --LOCATION CREATION--");
+        Console.WriteLine();
         Console.WriteLine(" < - Go back to the Previous Menu");
         Console.WriteLine("===============================================");
 
@@ -233,20 +232,16 @@ void AddNewLocation()
         try
         {
             Location location = new Location(id, displayName, description, chosenType, [], []);
-
-            Console.WriteLine(location.id);
-            Console.WriteLine(location.name);
-            Console.WriteLine(location.description);
-            Console.WriteLine(chosenType);
         }
         catch (Exception e)
         {
-            errorMessage = e.ToString();
+            errorMessage = e.Message;
         }
 
         //TODO: Check if the location already exists. Also check what happens when you save and the ID exists; should replace.
+        //TODO: Save the location to JSON
 
-        error = false;
+        break;
     }
 }
 
