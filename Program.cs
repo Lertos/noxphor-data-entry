@@ -235,7 +235,8 @@ void AddNewLocation()
         }
         catch (Exception e)
         {
-            errorMessage = e.Message;
+            errorMessage = "Could not create the location. Please check the details and try again. Error: \n" + e.Message;
+            return;
         }
 
         //TODO: Check if the location already exists. Also check what happens when you save and the ID exists; should replace.
