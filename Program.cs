@@ -266,7 +266,15 @@ void DeleteLocation()
 void ShowAllLocations()
 {
     //TODO: Get list of locations and use this while in this menu
-    Location[] locations = new Location[11];    
+    Location[] locations = new Location[11];
+
+    //TODO: Test data - delete later
+    for (int i = 0; i < locations.Length; i++)
+    {
+        Location location = new Location("loc" +  i, "Loc" + i, "This is the loc " + i, Location.Type.BASE);
+        locations[i] = location;
+    }
+    
     int currentIndex = 0;
 
     while(true)
@@ -306,7 +314,10 @@ void ShowAllLocations()
             }
             else if (ck == ConsoleKey.RightArrow)
             {
-                currentIndex = Math.Min(currentIndex + 9, locations.Length - 1);
+                if (currentIndex + 9 < locations.Length)
+                {
+                    currentIndex = Math.Min(currentIndex + 9, locations.Length - 1);
+                }
                 continue;
             }
             else if (ck == ConsoleKey.B)
@@ -323,17 +334,19 @@ void ShowLocationPage(Location[] locations, int currentIndex)
 {
     int counter = 0;
 
-    for (int i = currentIndex; i < Math.Min(currentIndex + 8, locations.Length); i++)
+    for (int i = currentIndex; i < Math.Min(currentIndex + 9, locations.Length); i++)
     {
         StringBuilder sb = new StringBuilder();
 
         sb.Append(" ");
         sb.Append(counter + 1);
-        sb.Append(locations[i].id);
         sb.Append(" - ");
+        sb.Append(locations[i].id);
+        sb.Append(" : ");
         sb.Append(locations[i].name);
 
         Console.WriteLine(sb.ToString());
+
         counter++;
     }
 }
