@@ -1,5 +1,7 @@
 ﻿
+using System.ComponentModel.Design;
 using System.Drawing;
+using System.Text;
 
 string errorMessage = "";
 
@@ -94,6 +96,7 @@ void LocationMenu()
         Console.WriteLine(" 1 - Add New Location");
         Console.WriteLine(" 2 - Edit Existing Location");
         Console.WriteLine(" 3 - Delete a Location");
+        Console.WriteLine(" 4 - List All Locations");
         Console.WriteLine();
         Console.WriteLine(" b - Back to the Previous Menu");
         Console.WriteLine(" m - Back to the Main Menu");
@@ -139,6 +142,10 @@ bool HandleLocationInput()
         //Delete location
         case 3:
             DeleteLocation();
+            break;
+        //Show all locations
+        case 4:
+            ShowAllLocations();
             break;
         default:
             errorMessage = "That is not a valid key input";
@@ -254,6 +261,81 @@ void EditLocation()
 void DeleteLocation()
 {
 
+}
+
+void ShowAllLocations()
+{
+    //TODO: Get list of locations and use this while in this menu
+    Location[] locations = new Location[11];    
+    int currentIndex = 0;
+
+    while(true)
+    {
+        Console.Clear();
+
+        Console.WriteLine("===============================================");
+        Console.WriteLine(" --LOCATION VIEWER--");
+        Console.WriteLine();
+        Console.WriteLine(" Use the LEFT and RIGHT arrow keys to navigate.");
+        Console.WriteLine(" b - Go back to the Previous Menu");
+        Console.WriteLine("===============================================");
+
+        if (!string.IsNullOrEmpty(errorMessage))
+        {
+            Console.Write(" ERROR: ");
+            Console.WriteLine(errorMessage);
+            Console.WriteLine("===============================================");
+
+            errorMessage = "";
+        }
+
+        ShowLocationPage(locations, currentIndex);
+
+        ConsoleKeyInfo cki = Console.ReadKey(false);
+        ConsoleKey ck = cki.Key;
+        char key = cki.KeyChar;
+
+        int digit;
+
+        if (!Int32.TryParse(key.ToString(), out digit))
+        {
+            if (ck == ConsoleKey.LeftArrow)
+            {
+                currentIndex = Math.Max(currentIndex - 9, 0);
+                continue;
+            }
+            else if (ck == ConsoleKey.RightArrow)
+            {
+                currentIndex = Math.Min(currentIndex + 9, locations.Length - 1);
+                continue;
+            }
+            else if (ck == ConsoleKey.B)
+            { 
+                break;
+            }
+        }
+
+        errorMessage = "That was not a valid key.";
+    }
+}
+
+void ShowLocationPage(Location[] locations, int currentIndex)
+{
+    int counter = 0;
+
+    for (int i = currentIndex; i < Math.Min(currentIndex + 8, locations.Length); i++)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.Append(" ");
+        sb.Append(counter + 1);
+        sb.Append(locations[i].id);
+        sb.Append(" - ");
+        sb.Append(locations[i].name);
+
+        Console.WriteLine(sb.ToString());
+        counter++;
+    }
 }
 
 void SaveLocation(Location location)
