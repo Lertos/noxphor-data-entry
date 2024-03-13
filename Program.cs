@@ -314,7 +314,7 @@ void ShowAllLocations()
             }
             else if (ck == ConsoleKey.RightArrow)
             {
-                currentIndex = Math.Min(currentIndex + 9, locations.Length - 9);
+                currentIndex = Math.Min(currentIndex + 9, locations.Length);
                 continue;
             }
             else if (ck == ConsoleKey.B)
@@ -331,6 +331,12 @@ void ShowLocationPage(Location[] locations, int currentIndex)
 {
     int counter = 0;
 
+    if (currentIndex == locations.Length)
+    {
+        Console.WriteLine(" --End of Locations--");
+        return;
+    }
+
     for (int i = currentIndex; i < Math.Min(currentIndex + 9, locations.Length); i++)
     {
         StringBuilder sb = new StringBuilder();
@@ -341,6 +347,8 @@ void ShowLocationPage(Location[] locations, int currentIndex)
         sb.Append(locations[i].id);
         sb.Append(" : ");
         sb.Append(locations[i].name);
+        sb.Append(" | ");
+        sb.Append(locations[i].description.Substring(0, Math.Min(locations[i].description.Length, 20)));
 
         Console.WriteLine(sb.ToString());
 
