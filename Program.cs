@@ -314,10 +314,7 @@ void ShowAllLocations()
             }
             else if (ck == ConsoleKey.RightArrow)
             {
-                if (currentIndex + 9 < locations.Length)
-                {
-                    currentIndex = Math.Min(currentIndex + 9, locations.Length - 1);
-                }
+                currentIndex = Math.Min(currentIndex + 9, locations.Length - 9);
                 continue;
             }
             else if (ck == ConsoleKey.B)
