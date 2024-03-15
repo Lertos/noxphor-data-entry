@@ -129,20 +129,10 @@ bool HandleLocationInput()
 
     switch (digit)
     {
-        //Add new location
         case 1:
             AddNewLocation();
             break;
-        //Edit location
         case 2:
-            EditLocation();
-            break;
-        //Delete location
-        case 3:
-            DeleteLocation();
-            break;
-        //Show all locations
-        case 4:
             ShowAllLocations();
             break;
         default:
@@ -252,7 +242,7 @@ void AddNewLocation()
 
 void EditLocation()
 {
-
+    
 }
 
 void DeleteLocation()
