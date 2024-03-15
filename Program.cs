@@ -94,12 +94,10 @@ void LocationMenu()
         Console.WriteLine("===============================================");
         Console.WriteLine();
         Console.WriteLine(" 1 - Add New Location");
-        Console.WriteLine(" 2 - Edit Existing Location");
-        Console.WriteLine(" 3 - Delete a Location");
-        Console.WriteLine(" 4 - List All Locations");
+        Console.WriteLine(" 2 - View Locations (Edit / Delete)");
         Console.WriteLine();
-        Console.WriteLine(" b - Back to the Previous Menu");
-        Console.WriteLine(" m - Back to the Main Menu");
+        Console.WriteLine(" b - Back to the previous menu");
+        Console.WriteLine(" m - Back to the main menu");
         Console.WriteLine(" q - Quit the application");
         Console.WriteLine();
         Console.WriteLine("===============================================");
@@ -164,7 +162,7 @@ void AddNewLocation()
         Console.WriteLine("===============================================");
         Console.WriteLine(" --LOCATION CREATION--");
         Console.WriteLine();
-        Console.WriteLine(" < - Go back to the Previous Menu");
+        Console.WriteLine(" < - Go back to the previous menu");
         Console.WriteLine("===============================================");
 
         if (!string.IsNullOrEmpty(errorMessage))
@@ -287,7 +285,8 @@ void ShowAllLocations()
         Console.WriteLine(" --LOCATION VIEWER--");
         Console.WriteLine();
         Console.WriteLine(" Use the LEFT and RIGHT arrow keys to navigate.");
-        Console.WriteLine(" b - Go back to the Previous Menu");
+        Console.WriteLine(" 1-9 : Select a location");
+        Console.WriteLine("  b  : Go back to the previous menu");
         Console.WriteLine("===============================================");
 
         if (!string.IsNullOrEmpty(errorMessage))
