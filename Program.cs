@@ -265,16 +265,19 @@ void DeleteLocation()
 
 void ShowAllLocations()
 {
-    //TODO: Get list of locations and use this while in this menu
-    Location[] locations = new Location[11];
+    Location[] locations = LoadLocations();
 
-    //TODO: Test data - delete later
+    //Test data - delete later
+    /*
+    Location[] locations = new Location[11];
+    
     for (int i = 0; i < locations.Length; i++)
     {
         Location location = new Location("loc" +  i, "Loc" + i, "This is the loc " + i, Location.Type.BASE);
         locations[i] = location;
     }
-    
+    */
+
     int currentIndex = 0;
 
     while(true)
@@ -363,13 +366,16 @@ void SaveLocation(Location location)
     storage.StoreObject(location, location.id);
 }
 
-Location LoadLocation(string locationID)
+Location[] LoadLocations()
 {
     ObjectStorage storage = new ObjectStorage(GameData.FILE_NAME_LOCATIONS);
 
-    //TODO: Add try catch if it cannot be found
-    Location location = storage.RetrieveObject<Location>(locationID);
-    Console.WriteLine(location.name);
+    Dictionary<string, Location> dict = storage.LoadObjects<Location>();
+    
+    if (dict == null || dict.Count == 0)
+        return [];
 
-    return location;
+    Location[] locations = dict.Values.ToArray();
+
+    return locations;
 }
