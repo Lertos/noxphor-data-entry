@@ -240,14 +240,14 @@ void AddNewLocation()
     }
 }
 
-void EditLocation()
+void EditLocation(int currentListIndex)
 {
-    
+    //TODO: Use currentListIndex by returning it so that the location list picks up where you left off
 }
 
-void DeleteLocation()
+void DeleteLocation(int currentListIndex)
 {
-
+    //TODO: Use currentListIndex by returning it so that the location list picks up where you left off
 }
 
 void ShowAllLocations()
@@ -313,9 +313,20 @@ void ShowAllLocations()
                 break;
             }
         }
+        else if (digit > 0 && digit < 10)
+        {
+            //TODO: Handle all keys from 1-9 and choose correct location based on the index and chosen digit
+            //ShowSpecificLocation();
+            break;
+        }
 
         errorMessage = "That was not a valid key.";
     }
+}
+
+void ShowSpecificLocation(Location location, int currentIndex)
+{
+    //TODO: Have the options for edit/delete for the chosen location, passing the current index
 }
 
 void ShowLocationPage(Location[] locations, int currentIndex)
