@@ -72,6 +72,7 @@ void HandleSharedKey(char key)
     else if (key == 'b' || key == 'B')
     {
         //TODO: Add logic to go back a menu (save previous menu state)
+        MainMenu(); //TODO: Delete this later. Just here for now for quick debugging
     }
     else if (key == 'm' || key == 'M')
     {
@@ -152,7 +153,7 @@ void AddNewLocation()
         Console.WriteLine("===============================================");
         Console.WriteLine(" --LOCATION CREATION--");
         Console.WriteLine();
-        Console.WriteLine(" < - Go back to the previous menu");
+        Console.WriteLine(" :q - Go back to the previous menu");
         Console.WriteLine("===============================================");
 
         if (!string.IsNullOrEmpty(errorMessage))
@@ -173,7 +174,7 @@ void AddNewLocation()
             errorMessage = "Location ID cannot be empty";
             continue;
         }
-        else if (id == ">") break;
+        else if (id == ":q") break;
 
         //Display name
         Console.WriteLine("\n==Enter the location display name:");
@@ -184,7 +185,7 @@ void AddNewLocation()
             errorMessage = "Location display name cannot be empty";
             continue;
         }
-        else if (id == ">") break;
+        else if (displayName == ":q") break;
 
         //Description
         Console.WriteLine("\n==Enter the location description:");
@@ -195,7 +196,7 @@ void AddNewLocation()
             errorMessage = "Location description cannot be empty";
             continue;
         }
-        else if (id == ">") break;
+        else if (description == ":q") break;
 
         //Type
         Console.Write("\n==Enter the location type. Options are (|");
@@ -213,7 +214,7 @@ void AddNewLocation()
             errorMessage = "Location type cannot be empty";
             continue;
         }
-        else if (id == ">") break;
+        else if (type == ":q") break;
 
         Location.Type chosenType;
         bool isValidType = Enum.TryParse(type.ToUpper(), out chosenType);
