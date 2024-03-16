@@ -340,6 +340,9 @@ void ShowSpecificLocation(Location[] locations, int index)
 {
     Location location = locations[index];
 
+    if (location == null)
+        return;
+
     while (true)
     {
         Console.Clear();
@@ -361,7 +364,16 @@ void ShowSpecificLocation(Location[] locations, int index)
             errorMessage = "";
         }
 
-        //TODO: Show all location information here
+        //Show all of the location information
+        Console.WriteLine();
+        Console.Write(" ID: ");
+        Console.WriteLine(location.id);
+        Console.Write(" Name: ");
+        Console.WriteLine(location.name);
+        //Console.Write(" Type: ");
+        //Console.WriteLine(location.type);
+        Console.Write(" Description: ");
+        Console.WriteLine(location.description);
 
         ConsoleKey ck = Console.ReadKey(false).Key;
 
