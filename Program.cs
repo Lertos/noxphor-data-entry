@@ -277,7 +277,8 @@ void ShowAllLocations()
         Console.WriteLine("===============================================");
         Console.WriteLine(" --LOCATION VIEWER--");
         Console.WriteLine();
-        Console.WriteLine(" Use the LEFT and RIGHT arrow keys to navigate.");
+        Console.WriteLine(" HELP: Use the LEFT and RIGHT arrow keys to navigate.");
+        Console.WriteLine();
         Console.WriteLine(" 1-9 : Select a location");
         Console.WriteLine("  b  : Go back to the previous menu");
         Console.WriteLine("===============================================");
