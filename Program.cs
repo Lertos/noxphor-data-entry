@@ -243,14 +243,14 @@ void AddNewLocation()
     }
 }
 
-void EditLocation(int currentListIndex)
+void EditLocation(Location[] locations, int index)
 {
-    //TODO: Use currentListIndex by returning it so that the location list picks up where you left off
+    //TODO
 }
 
-void DeleteLocation(int currentListIndex)
+void DeleteLocation(Location[] locations, int index)
 {
-    //TODO: Use currentListIndex by returning it so that the location list picks up where you left off
+    //TODO
 }
 
 void ShowAllLocations()
@@ -319,18 +319,69 @@ void ShowAllLocations()
         }
         else if (digit > 0 && digit < 10)
         {
-            //TODO: Handle all keys from 1-9 and choose correct location based on the index and chosen digit
-            //ShowSpecificLocation();
-            break;
+            int chosenIndex = currentIndex + (digit - 1);
+
+            if (chosenIndex < 0 || chosenIndex >= locations.Length)
+            {
+                errorMessage = "That is not a valid location index.";
+            }
+            else
+            {
+                ShowSpecificLocation(locations, chosenIndex);
+                break;
+            }
         }
 
         errorMessage = "That was not a valid key.";
     }
 }
 
-void ShowSpecificLocation(Location location, int currentIndex)
+void ShowSpecificLocation(Location[] locations, int index)
 {
-    //TODO: Have the options for edit/delete for the chosen location, passing the current index
+    Location location = locations[index];
+
+    while (true)
+    {
+        Console.Clear();
+
+        Console.WriteLine("===============================================");
+        Console.WriteLine(" --LOCATION OPERATIONS--");
+        Console.WriteLine();
+        Console.WriteLine(" e : Edit this location");
+        Console.WriteLine(" d : Delete this location");
+        Console.WriteLine(" b : Go back to the previous menu");
+        Console.WriteLine("===============================================");
+
+        if (!string.IsNullOrEmpty(errorMessage))
+        {
+            Console.Write(" ERROR: ");
+            Console.WriteLine(errorMessage);
+            Console.WriteLine("===============================================");
+
+            errorMessage = "";
+        }
+
+        //TODO: Show all location information here
+
+        ConsoleKey ck = Console.ReadKey(false).Key;
+
+        if (ck == ConsoleKey.E)
+        {
+            EditLocation(locations, index);
+            break;
+        }
+        else if (ck == ConsoleKey.D)
+        {
+            DeleteLocation(locations, index);
+            break;
+        }
+        else if (ck == ConsoleKey.B)
+        {
+            break;
+        }
+
+        errorMessage = "That was not a valid key.";
+    }
 }
 
 void ShowLocationPage(Location[] locations, int currentIndex)
