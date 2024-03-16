@@ -33,7 +33,9 @@ void MainMenu()
         }
 
         if (HandleInput())
-            break;
+        {
+            //break; //TODO: Depending on how states are implemented, uncomment this
+        }
     }
 }
 
