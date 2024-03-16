@@ -243,19 +243,19 @@ void AddNewLocation()
     }
 }
 
-void EditLocation(Location[] locations, int index)
+void EditLocation(List<Location> locations, int index)
 {
     //TODO
 }
 
-void DeleteLocation(Location[] locations, int index)
+void DeleteLocation(List<Location> locations, int index)
 {
     //TODO
 }
 
 void ShowAllLocations()
 {
-    Location[] locations = LoadLocations();
+    List<Location> locations = LoadLocations();
 
     //Test data - delete later
     /*
@@ -309,7 +309,7 @@ void ShowAllLocations()
             }
             else if (ck == ConsoleKey.RightArrow)
             {
-                currentIndex = Math.Min(currentIndex + 9, locations.Length);
+                currentIndex = Math.Min(currentIndex + 9, locations.Count);
                 continue;
             }
             else if (ck == ConsoleKey.B)
@@ -321,7 +321,7 @@ void ShowAllLocations()
         {
             int chosenIndex = currentIndex + (digit - 1);
 
-            if (chosenIndex < 0 || chosenIndex >= locations.Length)
+            if (chosenIndex < 0 || chosenIndex >= locations.Count)
             {
                 errorMessage = "That is not a valid location index.";
             }
@@ -336,7 +336,7 @@ void ShowAllLocations()
     }
 }
 
-void ShowSpecificLocation(Location[] locations, int index)
+void ShowSpecificLocation(List<Location> locations, int index)
 {
     Location location = locations[index];
 
@@ -396,17 +396,17 @@ void ShowSpecificLocation(Location[] locations, int index)
     }
 }
 
-void ShowLocationPage(Location[] locations, int currentIndex)
+void ShowLocationPage(List<Location> locations, int currentIndex)
 {
     int counter = 0;
 
-    if (currentIndex == locations.Length)
+    if (currentIndex == locations.Count)
     {
         Console.WriteLine(" --End of Locations--");
         return;
     }
 
-    for (int i = currentIndex; i < Math.Min(currentIndex + 9, locations.Length); i++)
+    for (int i = currentIndex; i < Math.Min(currentIndex + 9, locations.Count); i++)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -432,7 +432,7 @@ void SaveLocation(Location location)
     storage.StoreObject(location, location.id);
 }
 
-Location[] LoadLocations()
+List<Location> LoadLocations()
 {
     ObjectStorage storage = new ObjectStorage(GameData.FILE_NAME_LOCATIONS);
 
@@ -441,7 +441,7 @@ Location[] LoadLocations()
     if (dict == null || dict.Count == 0)
         return [];
 
-    Location[] locations = dict.Values.ToArray();
+    List<Location> locations = dict.Values.ToList();
 
     return locations;
 }
