@@ -248,9 +248,13 @@ void EditLocation(List<Location> locations, int index)
     //TODO
 }
 
-void DeleteLocation(List<Location> locations, int index)
+void RemoveLocation(List<Location> locations, int index)
 {
-    //TODO
+    Location location = locations[index];
+
+    DeleteLocation(location.id);
+
+    locations.RemoveAt(index);
 }
 
 void ShowAllLocations()
@@ -384,7 +388,7 @@ void ShowSpecificLocation(List<Location> locations, int index)
         }
         else if (ck == ConsoleKey.D)
         {
-            DeleteLocation(locations, index);
+            RemoveLocation(locations, index);
             break;
         }
         else if (ck == ConsoleKey.B)
@@ -423,6 +427,13 @@ void ShowLocationPage(List<Location> locations, int currentIndex)
 
         counter++;
     }
+}
+
+void DeleteLocation(string locationID)
+{
+    ObjectStorage storage = new ObjectStorage(GameData.FILE_NAME_LOCATIONS);
+
+    storage.DeleteObject<Location>(locationID);
 }
 
 void SaveLocation(Location location)
