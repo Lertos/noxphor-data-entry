@@ -263,12 +263,11 @@ void ShowAllLocations()
 
     //Test data - delete later
     /*
-    Location[] locations = new Location[11];
-    
-    for (int i = 0; i < locations.Length; i++)
+    List<Location> locations = new();
+    for (int i = 0; i < 11; i++)
     {
         Location location = new Location("loc" +  i, "Loc" + i, "This is the loc " + i, Location.Type.BASE);
-        locations[i] = location;
+        locations.Add(location);
     }
     */
 
