@@ -133,7 +133,7 @@ bool HandleLocationInput()
     switch (digit)
     {
         case 1:
-            AddNewLocation();
+            LocationCreator();
             break;
         case 2:
             ShowAllLocations();
@@ -146,14 +146,15 @@ bool HandleLocationInput()
     return true;
 }
 
-void AddNewLocation()
+// Reused for both adding and editing locations
+void LocationCreator(bool isNewLocation = true, string existingID = "")
 {
     while (true)
     {
         Console.Clear();
 
         Console.WriteLine("===============================================");
-        Console.WriteLine(" --LOCATION CREATION--");
+        Console.WriteLine((isNewLocation) ? " --LOCATION CREATION--" : " --LOCATION EDITOR--");
         Console.WriteLine();
         Console.WriteLine(" :q - Go back to the previous menu");
         Console.WriteLine("===============================================");
@@ -168,15 +169,25 @@ void AddNewLocation()
         }
 
         //ID
-        Console.WriteLine("\n==Enter the location ID:");
-        string? id = Console.ReadLine();
+        string? id = existingID;
 
-        if (string.IsNullOrEmpty(id))
+        if (isNewLocation || existingID == "")
         {
-            errorMessage = "Location ID cannot be empty";
-            continue;
+            Console.WriteLine("\n==Enter the location ID:");
+            id = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(id))
+            {
+                errorMessage = "Location ID cannot be empty";
+                continue;
+            }
+            else if (id == ":q") break;
         }
-        else if (id == ":q") break;
+        else
+        {
+            Console.Write("You are editing the location ID: ");
+            Console.WriteLine(id);
+        }
 
         //Display name
         Console.WriteLine("\n==Enter the location display name:");
@@ -241,20 +252,6 @@ void AddNewLocation()
 
         break;
     }
-}
-
-void EditLocation(List<Location> locations, int index)
-{
-    //TODO
-}
-
-void RemoveLocation(List<Location> locations, int index)
-{
-    Location location = locations[index];
-
-    DeleteLocation(location.id);
-
-    locations.RemoveAt(index);
 }
 
 void ShowAllLocations()
@@ -382,12 +379,14 @@ void ShowSpecificLocation(List<Location> locations, int index)
 
         if (ck == ConsoleKey.E)
         {
-            EditLocation(locations, index);
+            LocationCreator(false, location.id);
             break;
         }
         else if (ck == ConsoleKey.D)
         {
-            RemoveLocation(locations, index);
+            DeleteLocation(location.id);
+
+            locations.RemoveAt(index);
             break;
         }
         else if (ck == ConsoleKey.B)
