@@ -370,8 +370,8 @@ void ShowSpecificLocation(List<Location> locations, int index)
         Console.WriteLine(location.id);
         Console.Write(" Name: ");
         Console.WriteLine(location.name);
-        //Console.Write(" Type: ");
-        //Console.WriteLine(location.type);
+        Console.Write(" Type: ");
+        Console.WriteLine(location.locationType);
         Console.Write(" Description: ");
         Console.WriteLine(location.description);
 
